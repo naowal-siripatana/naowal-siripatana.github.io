@@ -3,27 +3,29 @@
 <style>
 :root{
   --night:#1C1430; --night-2:#2A1F45; --night-3:#3A2C5E;
-  --ink:#2A1B3D; --parch:#FFF4E6; --parch-2:#F6E2C8;
+  --ink:#2A1B3D; --parch:#FFFFFF; --parch-2:#FFE9D2;
   --coral:#FF6B4A; --coral-deep:#E2482A; --honey:#FFC15E; --blush:#FF9EC4; --mint:#7FE0C2; --lav:#C9BCEF;
   --muted-ink:#6B5A80;
+  --page-bg:#FFF6EA;
   --px:'Pixelify Sans','Chakra Petch',monospace;
   --body:'Nunito','Mitr',system-ui,-apple-system,sans-serif;
-  color-scheme: dark;
+  color-scheme: light;
 }
 *{box-sizing:border-box;}
 body{
   margin:0;
   background:
-    radial-gradient(1100px 560px at 82% -8%, #3B2A63 0%, transparent 60%),
-    radial-gradient(850px 480px at 2% 105%, #3A1F3F 0%, transparent 60%),
-    var(--night);
-  color:var(--parch);
+    radial-gradient(1100px 560px at 82% -8%, #FFDDB0 0%, transparent 60%),
+    radial-gradient(900px 520px at 4% 8%, #FFD3E4 0%, transparent 55%),
+    radial-gradient(850px 480px at 50% 115%, #CDF3E4 0%, transparent 60%),
+    var(--page-bg);
+  color:var(--ink);
   font-family:var(--body);
   font-size:16px; line-height:1.65;
   -webkit-font-smoothing:antialiased;
 }
 #page{padding-inline:clamp(20px,5vw,64px);}
-h1,h2,h3{font-family:var(--px); line-height:1.18; margin:0; text-wrap:balance; color:var(--parch); font-weight:600;}
+h1,h2,h3{font-family:var(--px); line-height:1.18; margin:0; text-wrap:balance; color:var(--ink); font-weight:600;}
 p{margin:0;}
 a{color:inherit; text-decoration:none;}
 img{max-width:100%; display:block;}
@@ -41,23 +43,23 @@ section{max-width:1080px;margin-inline:auto;}
   padding-block:14px;
   margin-inline:calc(-1 * clamp(20px,5vw,64px));
   padding-inline:clamp(20px,5vw,64px);
-  background:var(--night-2);
-  border-bottom:3px solid var(--night-3);
+  background:var(--parch);
+  border-bottom:3px solid var(--ink);
 }
-.brand{font-family:var(--px); font-weight:600; font-size:1.05rem; display:flex; align-items:center; gap:8px; color:var(--honey);}
+.brand{font-family:var(--px); font-weight:600; font-size:1.05rem; display:flex; align-items:center; gap:8px; color:var(--coral-deep);}
 .brand .heart{color:var(--blush);}
-.navlinks{display:flex; gap:22px; font-size:0.82rem; font-family:var(--px); color:var(--lav);}
+.navlinks{display:flex; gap:22px; font-size:0.82rem; font-family:var(--px); color:var(--muted-ink);}
 .navlinks a{transition:color .15s ease;}
-.navlinks a:hover, .navlinks a:focus-visible{color:var(--honey);}
+.navlinks a:hover, .navlinks a:focus-visible{color:var(--coral-deep);}
 @media (max-width: 780px){ .navlinks{display:none;} }
 
 .lang-toggle{
-  display:inline-flex; border:2px solid var(--night-3); border-radius:0; padding:3px; gap:2px;
-  background:var(--night);
+  display:inline-flex; border:2px solid var(--ink); border-radius:0; padding:3px; gap:2px;
+  background:var(--parch);
 }
 .lang-toggle button{
   font-family:var(--px); font-weight:600; font-size:0.7rem; letter-spacing:.03em;
-  border:none; background:transparent; color:var(--lav);
+  border:none; background:transparent; color:var(--muted-ink);
   padding:6px 12px; border-radius:0; cursor:pointer;
 }
 .lang-toggle button[aria-pressed="true"]{background:var(--coral); color:var(--ink);}
@@ -71,12 +73,12 @@ section{max-width:1080px;margin-inline:auto;}
   padding:5px 12px; margin-bottom:14px;
 }
 .band h2{font-size:clamp(1.4rem,3.4vw,2.15rem); max-width:24ch;}
-.band .lede{color:var(--lav); max-width:64ch; margin-top:14px; font-size:1rem; line-height:1.75;}
+.band .lede{color:var(--muted-ink); max-width:64ch; margin-top:14px; font-size:1rem; line-height:1.75;}
 
 /* ---------- quest intro strip ---------- */
 .quest-intro{padding-block:20px 8px; display:flex; flex-direction:column; gap:6px;}
 .quest-intro .eyebrow{margin-bottom:2px;}
-.quest-intro p{color:var(--lav); font-size:0.92rem; max-width:56ch;}
+.quest-intro p{color:var(--muted-ink); font-size:0.92rem; max-width:56ch;}
 
 /* ---------- pixel card ("parchment") ---------- */
 .pcard{
@@ -84,6 +86,21 @@ section{max-width:1080px;margin-inline:auto;}
   border:3px solid var(--ink);
   box-shadow:5px 5px 0 0 var(--ink);
 }
+
+/* ---------- AI journey (follow) ---------- */
+.journey{display:grid; grid-template-columns:1.3fr 1fr; gap:22px; align-items:center; padding:clamp(20px,4vw,34px); background:linear-gradient(135deg,var(--night) 0%,var(--night-2) 55%,#5B3A78 100%); color:var(--parch); border:3px solid var(--ink); box-shadow:6px 6px 0 var(--ink);}
+.journey h2,.journey h3{color:var(--parch);}
+.journey .eyebrow{color:var(--mint);}
+.journey p{color:var(--lav); max-width:56ch; margin-top:10px;}
+.journey .cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:18px;}
+.journey .btn-primary{background:var(--honey); color:var(--ink);}
+.journey .btn-primary:hover{background:var(--mint);}
+.journey .btn-ghost{color:var(--parch); border-color:var(--parch); box-shadow:4px 4px 0 var(--ink);}
+.journey .btn-ghost:hover{color:var(--honey); border-color:var(--honey);}
+.journey .stats{display:grid; gap:10px; margin:0; padding:0; list-style:none;}
+.journey .stats li{font-family:var(--px); font-size:0.86rem; background:#ffffff14; border:2px solid #ffffff33; padding:10px 14px;}
+.journey .stats b{color:var(--honey); font-weight:600;}
+@media (max-width: 780px){ .journey{grid-template-columns:1fr;} }
 
 /* ---------- buttons ---------- */
 .btn{
@@ -98,8 +115,8 @@ section{max-width:1080px;margin-inline:auto;}
 .btn:active{transform:translate(1px,1px); box-shadow:2px 2px 0 var(--ink);}
 .btn-primary{background:var(--coral); color:var(--parch);}
 .btn-primary:hover{background:var(--coral-deep);}
-.btn-ghost{background:var(--night-2); color:var(--parch); border-color:var(--night-3);}
-.btn-ghost:hover{border-color:var(--honey); color:var(--honey);}
+.btn-ghost{background:transparent; color:var(--ink); border-color:var(--ink);}
+.btn-ghost:hover{border-color:var(--coral-deep); color:var(--coral-deep);}
 
 /* ---------- tags ---------- */
 .tag-row{display:flex; flex-wrap:wrap; gap:8px;}
@@ -134,8 +151,8 @@ section{max-width:1080px;margin-inline:auto;}
 .skill-card h3{font-size:0.92rem; margin-bottom:12px; display:flex; align-items:center; gap:8px; color:var(--ink);}
 .skill-card h3::before{content:""; width:9px; height:9px; background:var(--coral); display:inline-block; flex:none;}
 
-.cert-block{margin-top:30px; padding-top:26px; border-top:2px dashed var(--night-3);}
-.cert-block h3{font-size:0.85rem; margin-bottom:12px; color:var(--honey); font-family:var(--px);}
+.cert-block{margin-top:30px; padding-top:26px; border-top:2px dashed var(--lav);}
+.cert-block h3{font-size:0.85rem; margin-bottom:12px; color:var(--coral-deep); font-family:var(--px);}
 
 /* ---------- timeline (quest log) ---------- */
 .timeline{margin-top:32px; display:flex; flex-direction:column; gap:14px;}
@@ -156,7 +173,7 @@ section{max-width:1080px;margin-inline:auto;}
 .project-link{font-family:var(--px); font-weight:700; font-size:0.72rem; color:var(--coral-deep); display:inline-flex; align-items:center; gap:6px;}
 .project-link svg{width:13px;height:13px;}
 
-.subhead{margin-top:38px; font-size:0.85rem; color:var(--honey); font-family:var(--px); letter-spacing:.02em;}
+.subhead{margin-top:38px; font-size:0.85rem; color:var(--coral-deep); font-family:var(--px); letter-spacing:.02em;}
 
 /* ---------- community ---------- */
 .community-wrap{
@@ -179,11 +196,13 @@ section{max-width:1080px;margin-inline:auto;}
   background:var(--night-2); border:3px solid var(--night-3);
   padding:clamp(36px,7vw,72px) clamp(20px,6vw,56px); text-align:center;
 }
-.contact-band h2{margin-top:8px;}
+.contact-band h2{margin-top:8px; color:var(--parch);}
 .contact-band p{color:var(--lav); max-width:56ch; margin:14px auto 0;}
 .contact-ctas{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:26px;}
+.contact-band .btn-ghost{background:transparent; color:var(--parch); border-color:var(--parch);}
+.contact-band .btn-ghost:hover{border-color:var(--honey); color:var(--honey);}
 
-footer{padding-block:28px; display:flex; justify-content:space-between; align-items:center; gap:12px; color:var(--lav); opacity:.7; font-family:var(--px); font-size:0.68rem; flex-wrap:wrap;}
+footer{padding-block:28px; display:flex; justify-content:space-between; align-items:center; gap:12px; color:var(--muted-ink); opacity:.85; font-family:var(--px); font-size:0.68rem; flex-wrap:wrap;}
 
 /* =====================================================================
    QUEST GAME (chibi) — scoped under #quest-app
@@ -413,6 +432,7 @@ footer{padding-block:28px; display:flex; justify-content:space-between; align-it
     <div class="brand"><span class="heart">&#9829;</span> Naowal.</div>
     <nav class="navlinks">
       <a href="#quest" class="th">เล่นเกม</a><a href="#quest" class="en">Play</a>
+      <a href="#journey" class="th">เส้นทาง AI</a><a href="#journey" class="en">AI Journey</a>
       <a href="#about" class="th">เกี่ยวกับ</a><a href="#about" class="en">About</a>
       <a href="#skills" class="th">ทักษะ</a><a href="#skills" class="en">Skills</a>
       <a href="#work" class="th">ผลงาน</a><a href="#work" class="en">Work</a>
@@ -453,6 +473,28 @@ footer{padding-block:28px; display:flex; justify-content:space-between; align-it
       </div>
       <div id="overlay"></div>
       <div class="sr" aria-live="polite" id="live"></div>
+    </div>
+  </section>
+
+  <!-- AI JOURNEY (follow) -->
+  <section class="band" id="journey" style="padding-top:24px;">
+    <div class="journey">
+      <div>
+        <span class="eyebrow th">กำลังทำอยู่ตอนนี้</span><span class="eyebrow en">What I'm doing now</span>
+        <h2 class="th">จาก Dev สู่ AI Engineer ใน 6 เดือน</h2>
+        <h2 class="en">From Dev to AI Engineer in 6 months</h2>
+        <p class="th">ผมกำลังเรียนและสร้างโปรเจกต์ AI จริงหนึ่งตัว ผู้ช่วยค้นความรู้ด้วย RAG แล้วแชร์ทุกขั้นตอนต่อสาธารณะ ทั้งสิ่งที่เรียนรู้ โค้ด และสิ่งที่พัง ใครอยากย้ายสายมาทำ AI ตามไปดูด้วยกันได้</p>
+        <p class="en">I'm learning and building one real AI project, a RAG knowledge assistant, and sharing every step in public: what I learn, the code, and what breaks. If you want to move into AI, follow along.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="https://dev-to-ai-engineer.vercel.app" target="_blank" rel="noopener"><span class="th">ดูแผนที่ 13 ด่าน</span><span class="en">Explore the 13-level map</span> &rarr;</a>
+          <a class="btn btn-ghost" href="https://www.youtube.com/@naowal" target="_blank" rel="noopener"><span class="th">ติดตามบน YouTube</span><span class="en">Follow on YouTube</span></a>
+        </div>
+      </div>
+      <ul class="stats">
+        <li><b>13</b> <span class="th">โมดูลตลอด 6 เดือน</span><span class="en">modules over 6 months</span></li>
+        <li><b>1</b> <span class="th">โปรเจกต์จริง สร้างต่อเนื่อง</span><span class="en">real project, built step by step</span></li>
+        <li><b>RAG</b> &middot; FastAPI &middot; PostgreSQL</li>
+      </ul>
     </div>
   </section>
 
@@ -743,6 +785,9 @@ footer{padding-block:28px; display:flex; justify-content:space-between; align-it
         </a>
         <a class="link-row" href="https://medium.com/@naowal" target="_blank" rel="noopener">
           <span class="th">บทความบน Medium</span><span class="en">Articles on Medium</span> <span class="tag2">Medium</span>
+        </a>
+        <a class="link-row" href="https://dev-to-ai-engineer.vercel.app" target="_blank" rel="noopener">
+          <span class="th">เส้นทาง Dev สู่ AI Engineer</span><span class="en">Dev to AI Engineer journey</span> <span class="tag2">Web</span>
         </a>
         <a class="link-row" href="https://dev.to/naowal" target="_blank" rel="noopener">
           <span class="th">โปรไฟล์ DEV Community</span><span class="en">DEV Community profile</span> <span class="tag2">DEV.to</span>

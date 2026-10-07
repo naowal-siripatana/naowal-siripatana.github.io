@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html lang="en"><head><meta charset=utf8><meta name="description" content="Naowal Siripatana: software engineer, learning designer and community builder. Playable profile, selected work, and the free Dev to AI Engineer learn-along."><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Naowal Siripatana</title>
 <style>
 :root{
@@ -411,7 +411,7 @@ footer{padding-block:28px; display:flex; justify-content:space-between; align-it
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=Mochiy+Pop+One&family=Nunito:wght@400;600;700;800&family=Chakra+Petch:wght@400;500;600;700&family=Mitr:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<div id="page" data-lang="th" lang="th">
+<div id="page" data-lang="en" lang="en">
 
   <div class="topbar">
     <div class="brand"><span class="heart">&#9829;</span> Naowal.</div>
@@ -424,8 +424,8 @@ footer{padding-block:28px; display:flex; justify-content:space-between; align-it
       <a href="#contact" class="th">ติดต่อ</a><a href="#contact" class="en">Contact</a>
     </nav>
     <div class="lang-toggle" role="group" aria-label="Language">
-      <button type="button" id="btn-th" aria-pressed="true">TH</button>
-      <button type="button" id="btn-en" aria-pressed="false">EN</button>
+      <button type="button" id="btn-th" aria-pressed="false">TH</button>
+      <button type="button" id="btn-en" aria-pressed="true">EN</button>
     </div>
   </div>
 
@@ -651,6 +651,18 @@ footer{padding-block:28px; display:flex; justify-content:space-between; align-it
     <h2 class="th">โปรเจกต์ที่อยากให้ลองดู</h2>
     <h2 class="en">Projects worth a look</h2>
 
+    <h3 class="subhead th">กำลังสร้างอยู่ตอนนี้</h3>
+    <h3 class="subhead en">Building now</h3>
+    <div class="project-grid">
+      <div class="project-card pcard">
+        <h3>Dev to AI Engineer</h3>
+        <div class="stack"><span>Python</span><span>FastAPI</span><span>RAG</span><span>YouTube</span></div>
+        <p class="th">คอร์สเรียนฟรี 6 เดือนสำหรับนักพัฒนา ที่เรียนไปพร้อมกัน: 176 วัน 13 เลเวล และโปรเจกต์จริงหนึ่งโปรเจกต์ (ผู้ช่วยค้นความรู้ด้วย AI) เรียนแบบสาธารณะ ผิดพลาดก็เล่าให้ดู</p>
+        <p class="en">A free 6-month learn-along for developers: 176 days, 13 levels and one real project, an AI knowledge assistant. Built in public, mistakes included.</p>
+        <p style="margin-top:10px"><a class="btn btn-primary" href="https://dev-to-ai-engineer.vercel.app/course.html" target="_blank" rel="noopener"><span class="th">ดูเนื้อหาคอร์ส</span><span class="en">See the course outline</span></a> <a class="btn btn-ghost" href="https://www.youtube.com/@naowal" target="_blank" rel="noopener">YouTube</a></p>
+      </div>
+    </div>
+
     <h3 class="subhead th">ผลงานจากการทำงาน</h3>
     <h3 class="subhead en">Professional Highlights</h3>
     <div class="project-grid">
@@ -768,6 +780,7 @@ footer{padding-block:28px; display:flex; justify-content:space-between; align-it
         <a class="btn btn-primary" href="mailto:naowalzaza@gmail.com">Email</a>
         <a class="btn btn-ghost" href="https://www.linkedin.com/in/naowal-siripatana/" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn btn-ghost" href="https://github.com/naowal-siripatana" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-ghost" href="https://dev-to-ai-engineer.vercel.app/" target="_blank" rel="noopener">Dev to AI Engineer</a>
         <a class="btn btn-ghost" href="https://www.facebook.com/ThaiDjango/" target="_blank" rel="noopener">ThaiDjango</a>
       </div>
     </div>
@@ -1174,10 +1187,14 @@ else start(window.claude&&window.claude.hot&&window.claude.hot.data||{});
     try { localStorage.setItem('naowal-lang', lang); } catch(e){}
   }
 
-  var saved = 'th';
+  var saved = 'en';
   try {
     var stored = localStorage.getItem('naowal-lang');
     if (stored === 'th' || stored === 'en') saved = stored;
+  } catch(e){}
+  try {
+    var q = new URLSearchParams(location.search).get('lang');
+    if (q === 'th' || q === 'en') saved = q;
   } catch(e){}
   setLang(saved);
 

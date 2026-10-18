@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Learning Design - Naowal Siripatana</title>
+<meta name="description" content="ออกแบบบทเรียนสายเทคให้คนเรียนจนจบ: ตรวจคอร์ส ออกแบบโมดูลใหม่ และทำแบบฝึกหัดเชิงโต้ตอบ / Learning design for tech courses that people actually finish.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Learning Design - Naowal Siripatana">
+<meta property="og:description" content="คอร์สขายได้ แต่คนเรียนจบไหม? ฉันออกแบบบทเรียนสายเทคให้คนเรียนจนจบ">
+<meta property="og:url" content="https://naowal-siripatana.github.io/learning-design.html">
+<meta property="og:image" content="https://dev-to-ai-engineer.vercel.app/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jersey+15&family=Chakra+Petch:wght@600;700&family=Nunito:wght@400;700;800&family=Mitr:wght@300;400;500&display=swap">
+<style>
+:root{
+  --night:#1C1430;--night-2:#2A1F45;--night-3:#3A2C5E;
+  --ink:#2A1B3D;--parch:#FFFFFF;--parch-2:#FFE9D2;
+  --coral:#FF6B4A;--coral-deep:#E2482A;--honey:#FFC15E;--blush:#FF9EC4;--mint:#7FE0C2;--mint-deep:#17806A;--lav:#C9BCEF;
+  --muted-ink:#6B5A80;--page-bg:#FFF6EA;
+  --px:'Jersey 15','Chakra Petch',monospace;
+  --body:'Nunito','Mitr',system-ui,-apple-system,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;
+  background:radial-gradient(1100px 560px at 82% -8%,#FFDDB0 0%,transparent 60%),radial-gradient(900px 520px at 4% 8%,#FFD3E4 0%,transparent 55%),var(--page-bg)}
+#page{padding-inline:clamp(16px,5vw,64px)}
+#page[data-lang="th"] .en{display:none}
+#page[data-lang="en"] .th{display:none}
+#page[data-lang="th"] b,#page[data-lang="th"] strong{font-weight:500}
+#page[data-lang="th"] h1,#page[data-lang="th"] h2{max-width:34ch}
+h1,h2,h3{font-family:var(--px);line-height:1.15;margin:0;font-weight:700;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+section{max-width:1040px;margin-inline:auto}
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px;
+  margin-inline:calc(-1*clamp(16px,5vw,64px));padding-inline:clamp(16px,5vw,64px);background:var(--parch);border-bottom:3px solid var(--ink)}
+.brand{font-family:var(--px);font-size:1.3rem;color:var(--coral-deep);text-decoration:none}
+.lang-toggle{display:inline-flex;border:2px solid var(--ink);padding:3px;gap:2px;background:var(--parch)}
+.lang-toggle button{font-family:var(--body);font-weight:800;font-size:.75rem;border:none;background:transparent;color:var(--muted-ink);padding:6px 12px;cursor:pointer;min-height:36px}
+.lang-toggle button[aria-pressed="true"]{background:var(--coral);color:var(--ink)}
+.band{padding-block:clamp(40px,7vw,72px)}
+.eyebrow{font-family:var(--body);font-weight:800;display:inline-block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--honey);background:var(--night-2);border:2px solid var(--night-3);padding:5px 12px;margin-bottom:14px}
+.band h2{font-size:clamp(1.6rem,3.6vw,2.4rem);max-width:26ch}
+.lede{color:var(--muted-ink);max-width:62ch;margin-top:14px;font-size:1.05rem}
+.pcard{background:var(--parch);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:800;font-size:.95rem;padding:12px 20px;min-height:48px;border:3px solid var(--ink);background:#fff;color:var(--ink);box-shadow:4px 4px 0 var(--ink);text-decoration:none;transition:transform .08s,box-shadow .08s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:focus-visible,.lang-toggle button:focus-visible,summary:focus-visible{outline:3px solid var(--mint-deep);outline-offset:3px}
+.btn-primary{background:var(--coral)}
+.cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
+
+/* hero */
+.hero{padding-block:clamp(48px,9vw,96px) clamp(32px,5vw,56px)}
+.hero h1{font-size:clamp(2.1rem,6vw,3.6rem);max-width:20ch}
+#page[data-lang="th"] .hero h1{font-size:clamp(1.9rem,5vw,3.1rem);max-width:22ch}
+.hero h1 em{font-style:normal;color:var(--coral-deep)}
+.hero .lede{font-size:1.12rem}
+
+/* grids */
+.grid{display:grid;gap:18px;margin-top:28px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.card{padding:20px 22px}
+.card h3{font-size:1.35rem;margin-bottom:6px}
+.card p{color:var(--muted-ink)}
+.num{font-family:var(--px);font-size:2rem;color:var(--coral-deep);line-height:1}
+.sign{display:flex;gap:14px;align-items:flex-start}
+.sign .ico{flex:none;width:40px;height:40px;display:grid;place-items:center;background:var(--parch-2);border:2px solid var(--ink);font-family:var(--px);font-size:1.4rem}
+
+/* example */
+.example{display:grid;grid-template-columns:1.1fr 1fr;gap:26px;align-items:center;padding:clamp(20px,4vw,32px);margin-top:28px;
+  background:linear-gradient(135deg,var(--night) 0%,var(--night-2) 55%,#5B3A78 100%);color:var(--parch);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink)}
+.example h3{font-size:1.6rem;color:var(--parch)}
+.example p{color:var(--lav);margin-top:8px}
+.example ul{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.example li{background:#ffffff14;border:2px solid #ffffff33;padding:8px 12px;font-size:.95rem}
+.example li b{color:var(--honey)}
+.example img{width:100%;height:auto;border:3px solid var(--ink);display:block}
+.example .btn{box-shadow:4px 4px 0 #000}
+@media (max-width:780px){.example{grid-template-columns:1fr}}
+
+/* pricing */
+.price{display:flex;flex-direction:column;padding:22px}
+.price h3{font-size:1.4rem}
+.price .amt{font-family:var(--px);font-size:2.2rem;color:var(--coral-deep);margin:8px 0 2px;line-height:1}
+.price .unit{font-size:.85rem;color:var(--muted-ink);margin-bottom:12px}
+.price ul{margin:0;padding-left:20px;color:var(--ink);flex:1}
+.price li{margin-bottom:6px}
+.price.hot{background:var(--parch-2)}
+.badge{align-self:flex-start;font-weight:800;font-size:.72rem;background:var(--mint);border:2px solid var(--ink);padding:2px 10px;margin-bottom:10px}
+.note{margin-top:16px;color:var(--muted-ink);font-size:.92rem}
+
+/* steps */
+.steps{counter-reset:s;list-style:none;padding:0;margin:28px 0 0;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.steps li{counter-increment:s;padding:18px 20px}
+.steps li::before{content:counter(s);display:block;font-family:var(--px);font-size:2rem;color:var(--coral-deep);line-height:1;margin-bottom:6px}
+.steps b{display:block;font-size:1.02rem}
+.steps span{color:var(--muted-ink);font-size:.95rem}
+
+/* fit */
+.fit h3{font-size:1.3rem;margin-bottom:8px}
+.fit ul{margin:0;padding-left:20px}
+.fit li{margin-bottom:6px}
+
+/* about */
+.about{display:grid;grid-template-columns:140px 1fr;gap:24px;align-items:start;padding:24px;margin-top:28px}
+.about img{width:140px;height:140px;object-fit:cover;border:3px solid var(--ink)}
+.about ul{margin:10px 0 0;padding-left:20px}
+.about li{margin-bottom:6px}
+@media (max-width:600px){.about{grid-template-columns:1fr}}
+
+/* faq */
+details{padding:16px 20px;margin-top:12px}
+summary{cursor:pointer;font-weight:800;list-style-position:outside}
+details p{margin-top:8px;color:var(--muted-ink)}
+
+/* contact */
+.contact{text-align:center;padding:clamp(28px,5vw,48px);margin-top:12px}
+.contact h2{margin-inline:auto}
+.contact .lede{margin-inline:auto}
+.contact .cta{justify-content:center}
+footer{max-width:1040px;margin:0 auto;padding:24px 0 48px;color:var(--muted-ink);font-size:.9rem;display:flex;gap:18px;flex-wrap:wrap}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+<div id="page" data-lang="th" lang="th">
+
+<header class="topbar">
+  <a class="brand" href="index.html">Naowal</a>
+  <div class="lang-toggle" role="group" aria-label="Language">
+    <button type="button" data-set="th" aria-pressed="true">ไทย</button>
+    <button type="button" data-set="en" aria-pressed="false">EN</button>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero">
+  <span class="eyebrow"><span class="th">บริการออกแบบบทเรียน</span><span class="en">Learning design service</span></span>
+  <h1 class="th">คอร์สของคุณขายได้ แต่<em>คนเรียนจบไหม?</em></h1>
+  <h1 class="en">Your course sells. But <em>do people finish it?</em></h1>
+  <p class="lede th">ฉันออกแบบบทเรียนสายเทคให้คนเรียนจนจบ แบ่งเรื่องยากเป็นก้าวเล็กๆ ให้ลงมือทำก่อนท่องทฤษฎี และมีเหตุผลให้ผู้เรียนกลับมาเรียนต่อทุกวัน</p>
+  <p class="lede en">I design tech lessons that people actually finish: hard topics cut into small steps, hands-on before theory, and a reason to come back the next day.</p>
+  <div class="cta">
+    <a class="btn btn-primary" href="#contact"><span class="th">คุยฟรี 15 นาที</span><span class="en">Free 15-minute call</span></a>
+    <a class="btn" href="#example"><span class="th">ดูตัวอย่างงาน</span><span class="en">See an example</span></a>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="band" style="padding-top:8px">
+  <span class="eyebrow"><span class="th">อาการที่พบบ่อย</span><span class="en">Common signs</span></span>
+  <h2 class="th">ถ้าคอร์สของคุณมีอาการแบบนี้ ปัญหามักไม่ได้อยู่ที่เนื้อหา</h2>
+  <h2 class="en">If your course shows these signs, the problem is rarely the content</h2>
+  <div class="grid g3">
+    <div class="pcard card sign"><div class="ico" aria-hidden="true">1</div><div>
+      <h3 class="th">คนหายหลังบทที่ 2–3</h3><h3 class="en">People drop after lesson 2 or 3</h3>
+      <p class="th">ยอดดูบทแรกสูง แล้วลดลงเรื่อยๆ ทั้งที่บทหลังๆ คือส่วนที่ดีที่สุด</p>
+      <p class="en">The first lesson gets the views, then numbers fall, even though the best part comes later.</p></div></div>
+    <div class="pcard card sign"><div class="ico" aria-hidden="true">2</div><div>
+      <h3 class="th">คำถามเดิมซ้ำในกลุ่ม</h3><h3 class="en">The same questions, again and again</h3>
+      <p class="th">ผู้เรียนติดที่จุดเดิม แปลว่าบทเรียนข้ามขั้นที่คนสอนมองว่า "ง่ายอยู่แล้ว"</p>
+      <p class="en">Learners get stuck in the same place: a step the lesson skipped because it felt obvious to the expert.</p></div></div>
+    <div class="pcard card sign"><div class="ico" aria-hidden="true">3</div><div>
+      <h3 class="th">ดูจบแต่ทำเองไม่ได้</h3><h3 class="en">They watch, but cannot do it alone</h3>
+      <p class="th">รีวิวบอกว่า "ฟังเข้าใจ" แต่พอเปิดไฟล์เปล่าแล้วไปต่อไม่ถูก</p>
+      <p class="en">Reviews say "clear explanation", yet a blank file still stops them cold.</p></div></div>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section class="band">
+  <span class="eyebrow"><span class="th">วิธีที่ฉันใช้</span><span class="en">How I fix it</span></span>
+  <h2 class="th">4 หลักที่ใช้ในทุกบทเรียน</h2>
+  <h2 class="en">Four principles in every lesson</h2>
+  <div class="grid g2">
+    <div class="pcard card"><div class="num">01</div><h3 class="th">ก้าวเล็ก ทำจบได้ในวันเดียว</h3><h3 class="en">Small steps, done in one sitting</h3>
+      <p class="th">บทละ 30–60 นาที มีเป้าชัดว่า "วันนี้จะทำอะไรได้" และเห็นผลลัพธ์จริงก่อนจบบท</p>
+      <p class="en">30 to 60 minutes per lesson, one clear "today you will be able to", and a real result before the end.</p></div>
+    <div class="pcard card"><div class="num">02</div><h3 class="th">ลงมือก่อน ทฤษฎีตามมา</h3><h3 class="en">Hands-on first, theory second</h3>
+      <p class="th">เริ่มจากคำถามชวนเดาหรือโค้ดที่พัง แล้วค่อยอธิบายว่าทำไม คนจำได้ดีกว่าการฟังบรรยายยาว</p>
+      <p class="en">Start with a guess or a broken piece of code, then explain why. People remember it better than a long lecture.</p></div>
+    <div class="pcard card"><div class="num">03</div><h3 class="th">เช็กว่าเข้าใจจริง</h3><h3 class="en">Check real understanding</h3>
+      <p class="th">checklist, คำถามสั้น และเกมเล็กๆ ที่ให้ผู้เรียนรู้ตัวเองว่าเข้าใจแล้วหรือยัง ก่อนไปบทถัดไป</p>
+      <p class="en">Checklists, short questions and small games, so learners know they got it before moving on.</p></div>
+    <div class="pcard card"><div class="num">04</div><h3 class="th">มีเหตุผลให้กลับมาเรียนต่อ</h3><h3 class="en">A reason to come back</h3>
+      <p class="th">ทบทวนเรื่องเก่าสั้นๆ ตอนเริ่มบท ปลดล็อกบทถัดไปเมื่อทำครบ และบอกล่วงหน้าว่าพรุ่งนี้จะได้ทำอะไร</p>
+      <p class="en">A quick recall of earlier lessons, the next lesson unlocks when you finish, and a teaser for tomorrow.</p></div>
+  </div>
+</section>
+
+<!-- EXAMPLE -->
+<section class="band" id="example">
+  <span class="eyebrow"><span class="th">ตัวอย่างงาน</span><span class="en">Example</span></span>
+  <h2 class="th">ดูของจริงได้เลย: คอร์สที่ฉันกำลังทำอยู่</h2>
+  <h2 class="en">See it for real: the course I am building now</h2>
+  <div class="example">
+    <div>
+      <h3>From Dev to AI Engineer</h3>
+      <p class="th">เส้นทาง 6 เดือนจาก developer สู่ AI Engineer ที่ฉันออกแบบเองและเรียนไปพร้อมผู้เรียน ใช้ทั้ง 4 หลักข้างบนในทุกบท</p>
+      <p class="en">A 6-month path from developer to AI engineer that I designed and am learning in public, using all four principles above.</p>
+      <ul>
+        <li class="th"><b>176 วัน</b> แบ่งเป็นบทเรียนรายวัน มีจังหวะเดียวกันทุกสัปดาห์</li>
+        <li class="en"><b>176 days</b> of daily lessons with the same weekly rhythm</li>
+        <li class="th"><b>ทุกบท:</b> warm-up, คำถามชวนเดา, แนวคิด 3 ชิ้น, ลงมือทำ, checklist</li>
+        <li class="en"><b>Every lesson:</b> warm-up, hook, three small ideas, hands-on, checklist</li>
+        <li class="th"><b>ปลดล็อกบทถัดไป</b> เมื่อทำ checklist ครบ พร้อมเกมฝึกสั้นๆ</li>
+        <li class="en"><b>The next day unlocks</b> when the checklist is done, plus short practice games</li>
+      </ul>
+      <div class="cta">
+        <a class="btn" href="https://dev-to-ai-engineer.vercel.app/" target="_blank" rel="noopener"><span class="th">เปิดดูเว็บคอร์ส</span><span class="en">Open the course</span></a>
+        <a class="btn" href="https://dev-to-ai-engineer.vercel.app/lessons/day-01.html" target="_blank" rel="noopener"><span class="th">ดูตัวอย่าง 1 บท</span><span class="en">See one lesson</span></a>
+      </div>
+    </div>
+    <img src="https://dev-to-ai-engineer.vercel.app/og.png" width="1200" height="630" alt="From Dev to AI Engineer course map" loading="lazy">
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="band" id="pricing">
+  <span class="eyebrow"><span class="th">บริการและราคา</span><span class="en">Services and prices</span></span>
+  <h2 class="th">เลือกตามขนาดงาน</h2>
+  <h2 class="en">Pick by the size of the job</h2>
+  <div class="grid g3">
+    <div class="pcard price">
+      <h3 class="th">ตรวจสุขภาพคอร์ส</h3><h3 class="en">Course health check</h3>
+      <div class="amt">3,500 ฿</div><div class="unit th">ต่อคอร์ส · ส่งภายใน 5 วัน</div><div class="unit en">per course · in 5 days</div>
+      <ul class="th"><li>ไล่ดูคอร์สแบบผู้เรียนจริง</li><li>ชี้จุดที่คนน่าจะหลุดหรือติด</li><li>รายงาน 1 หน้า พร้อมสิ่งที่ควรแก้ 5 ข้อ เรียงตามผลกระทบ</li><li>คุยสรุปผล 30 นาที</li></ul>
+      <ul class="en"><li>I go through the course as a real learner</li><li>I mark where people are likely to drop or get stuck</li><li>A one-page report with 5 fixes, ranked by impact</li><li>A 30-minute call to walk through it</li></ul>
+    </div>
+    <div class="pcard price hot">
+      <span class="badge th">ยอดนิยม</span><span class="badge en">Most useful</span>
+      <h3 class="th">ออกแบบโมดูลใหม่</h3><h3 class="en">Module redesign</h3>
+      <div class="amt">8,000 ฿</div><div class="unit th">เริ่มต้น ต่อ 1 โมดูล (4–6 บท)</div><div class="unit en">from, per module (4 to 6 lessons)</div>
+      <ul class="th"><li>เป้าหมายของแต่ละบทแบบวัดผลได้</li><li>ลำดับบทเรียนและสคริปต์โครงร่าง</li><li>แบบฝึกหัดลงมือทำ พร้อมเฉลย</li><li>checklist และคำถามทบทวนท้ายบท</li><li>แก้ได้ 1 รอบ</li></ul>
+      <ul class="en"><li>Measurable goals for each lesson</li><li>Lesson order and an outline script</li><li>Hands-on exercises with answers</li><li>Checklists and end-of-lesson questions</li><li>One round of changes</li></ul>
+    </div>
+    <div class="pcard price">
+      <h3 class="th">แบบฝึกหัดเชิงโต้ตอบ</h3><h3 class="en">Interactive practice</h3>
+      <div class="amt">5,000 ฿</div><div class="unit th">เริ่มต้น ต่อชุด</div><div class="unit en">from, per set</div>
+      <ul class="th"><li>เกมหรือ quiz บนเว็บ เปิดได้ทุกเครื่อง</li><li>checklist ติดตามความคืบหน้าของผู้เรียน</li><li>ส่งเป็นไฟล์ HTML ใช้กับแพลตฟอร์มเดิมได้</li></ul>
+      <ul class="en"><li>Web games or quizzes that run on any device</li><li>A progress checklist for learners</li><li>Delivered as HTML files that work with your current platform</li></ul>
+    </div>
+  </div>
+  <p class="note th">ราคายังไม่รวม VAT · งานใหญ่หรือหลายโมดูล ประเมินราคาหลังคุยกันก่อนเสมอ · รับงานเดือนละไม่เกิน 2 ราย เพื่อให้ทำได้ละเอียด</p>
+  <p class="note en">Prices exclude VAT · Larger or multi-module jobs are quoted after a first call · I take at most 2 clients a month so each one gets proper attention.</p>
+</section>
+
+<!-- PROCESS -->
+<section class="band">
+  <span class="eyebrow"><span class="th">ขั้นตอน</span><span class="en">How it works</span></span>
+  <h2 class="th">ง่ายๆ 4 ขั้น</h2>
+  <h2 class="en">Four simple steps</h2>
+  <ol class="steps">
+    <li class="pcard"><b class="th">คุยฟรี 15 นาที</b><b class="en">Free 15-minute call</b><span class="th">เล่าว่าคอร์สสอนอะไร ใครเรียน และติดตรงไหน</span><span class="en">Tell me what the course teaches, who takes it, and where it hurts.</span></li>
+    <li class="pcard"><b class="th">ใบเสนอราคา</b><b class="en">A clear quote</b><span class="th">ขอบเขตงาน ราคา และวันส่งงาน ในหน้าเดียว</span><span class="en">Scope, price and delivery date on one page.</span></li>
+    <li class="pcard"><b class="th">ทำงาน 1–2 สัปดาห์</b><b class="en">1 to 2 weeks of work</b><span class="th">ส่งร่างให้ดูระหว่างทาง ไม่ต้องรอจนจบ</span><span class="en">You see drafts along the way, not only at the end.</span></li>
+    <li class="pcard"><b class="th">ส่งมอบและแก้ 1 รอบ</b><b class="en">Handover and one revision</b><span class="th">ได้ไฟล์ทั้งหมด พร้อมคำอธิบายวิธีใช้</span><span class="en">You get every file, with notes on how to use them.</span></li>
+  </ol>
+</section>
+
+<!-- FIT -->
+<section class="band">
+  <span class="eyebrow"><span class="th">เหมาะกับใคร</span><span class="en">Is this for you?</span></span>
+  <div class="grid g2" style="margin-top:6px">
+    <div class="pcard card fit">
+      <h3 class="th">เหมาะกับ</h3><h3 class="en">A good fit</h3>
+      <ul class="th"><li>คนทำคอร์สออนไลน์สายโปรแกรมมิ่ง ข้อมูล และ AI</li><li>bootcamp ที่อยากให้ผู้เรียนจบมากขึ้น</li><li>ทีมที่ทำคอร์สอบรมภายในองค์กร</li></ul>
+      <ul class="en"><li>Online course creators in programming, data and AI</li><li>Bootcamps that want more learners to finish</li><li>Teams building internal training</li></ul>
+    </div>
+    <div class="pcard card fit">
+      <h3 class="th">ไม่ได้รับงาน</h3><h3 class="en">Not what I do</h3>
+      <ul class="th"><li>ถ่ายหรือตัดต่อวิดีโอ</li><li>ทำการตลาดหรือยิงโฆษณาขายคอร์ส</li><li>เขียนเนื้อหาทั้งคอร์สใหม่หมดในเรื่องที่ไม่ใช่สายเทค</li></ul>
+      <ul class="en"><li>Filming or video editing</li><li>Marketing or running ads for the course</li><li>Writing a whole course from scratch outside tech topics</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="band">
+  <span class="eyebrow"><span class="th">ใครเป็นคนทำ</span><span class="en">Who you will work with</span></span>
+  <div class="pcard about">
+    <img src="https://dev-to-ai-engineer.vercel.app/assets/naowal-avatar.jpg" width="140" height="140" alt="Naowal Siripatana">
+    <div>
+      <h2 style="font-size:1.6rem">Naowal Siripatana</h2>
+      <p class="th" style="margin-top:6px">ซอฟต์แวร์เอนจิเนียร์ที่ชอบทำให้เรื่องยากเข้าใจง่าย</p>
+      <p class="en" style="margin-top:6px">A software engineer who loves making hard topics easy to reach.</p>
+      <ul class="th"><li>เคยเป็น <b>Learning Designer ที่ FutureSkill</b> ออกแบบคอร์ส Big Data และ Data Engineering</li><li>เป็น <b>ผู้ช่วยสอนสายเทคแบบฟรีแลนซ์</b> เกือบ 2 ปี ช่วยให้ผู้เรียนไปถึงบทสุดท้าย</li><li>ทำงานซอฟต์แวร์มากกว่า 8 ปี (Python, Django, Java, Go, .NET)</li><li>ดูแลชุมชน <b>ThaiDjango</b> ตั้งแต่ปี 2019</li></ul>
+      <ul class="en"><li>Former <b>Learning Designer at FutureSkill</b>, designing Big Data and Data Engineering courses</li><li><b>Freelance teaching assistant in tech</b> for almost 2 years, helping learners reach the last lesson</li><li>8+ years building software (Python, Django, Java, Go, .NET)</li><li>Running the <b>ThaiDjango</b> community since 2019</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="band" style="padding-top:8px">
+  <span class="eyebrow">FAQ</span>
+  <h2 class="th">คำถามที่พบบ่อย</h2><h2 class="en">Questions</h2>
+  <details class="pcard"><summary class="th">ต้องส่งอะไรให้บ้าง?</summary><summary class="en">What do you need from me?</summary>
+    <p class="th">สิทธิ์เข้าดูคอร์ส (หรือสไลด์และสคริปต์) กับข้อมูลคร่าวๆ ว่าคนเรียนหยุดตรงไหน ถ้ามี ถ้าไม่มีข้อมูลก็เริ่มได้</p>
+    <p class="en">Access to the course (or the slides and scripts), and any rough numbers on where people stop. No numbers is fine too.</p></details>
+  <details class="pcard"><summary class="th">ทำคอร์สหัวข้ออะไรได้บ้าง?</summary><summary class="en">Which topics can you work on?</summary>
+    <p class="th">สายเทคทั้งหมดที่ฉันเข้าใจจริง เช่น Python, เว็บ backend, ข้อมูล, Django, .NET และ AI เบื้องต้นถึงกลาง</p>
+    <p class="en">Tech topics I genuinely understand: Python, web backends, data, Django, .NET, and beginner to intermediate AI.</p></details>
+  <details class="pcard"><summary class="th">เนื้อหาเป็นของใคร?</summary><summary class="en">Who owns the work?</summary>
+    <p class="th">ของคุณทั้งหมดหลังชำระเงินครบ ฉันขอแค่สิทธิ์เล่าเป็นตัวอย่างผลงานแบบไม่เปิดเผยรายละเอียด ถ้าคุณอนุญาต</p>
+    <p class="en">All yours once paid in full. I only ask, with your permission, to mention it as an example without private details.</p></details>
+  <details class="pcard"><summary class="th">ชำระเงินอย่างไร?</summary><summary class="en">How do I pay?</summary>
+    <p class="th">มัดจำ 50% ก่อนเริ่มงาน และอีก 50% ตอนส่งมอบ โอนผ่านบัญชีธนาคารหรือพร้อมเพย์</p>
+    <p class="en">50% before we start and 50% on delivery, by bank transfer or PromptPay.</p></details>
+</section>
+
+<!-- CONTACT -->
+<section class="band" id="contact">
+  <div class="pcard contact">
+    <span class="eyebrow"><span class="th">เริ่มคุยกัน</span><span class="en">Let's talk</span></span>
+    <h2 class="th">เล่าเรื่องคอร์สของคุณให้ฟังหน่อย</h2>
+    <h2 class="en">Tell me about your course</h2>
+    <p class="lede th">ส่งอีเมลมาบอกชื่อคอร์ส ลิงก์ และปัญหาที่เจอ แล้วฉันจะตอบกลับภายใน 2 วันทำการ เพื่อนัดคุยฟรี 15 นาที</p>
+    <p class="lede en">Email me the course name, a link and what is not working. I reply within 2 working days to book a free 15-minute call.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="mailto:naowalzaza@gmail.com?subject=Learning%20design%20-%20"><span class="th">ส่งอีเมล</span><span class="en">Send an email</span></a>
+      <a class="btn" href="https://www.linkedin.com/in/naowal-siripatana/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <a href="index.html"><span class="th">&larr; กลับหน้าหลัก</span><span class="en">&larr; Back to home</span></a>
+  <a href="https://dev-to-ai-engineer.vercel.app/" target="_blank" rel="noopener">From Dev to AI Engineer</a>
+</footer>
+</div>
+
+<script>
+(function () {
+  var page = document.getElementById("page"), btns = document.querySelectorAll("[data-set]");
+  function set(l) {
+    page.dataset.lang = l; page.lang = l; document.documentElement.lang = l;
+    btns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.set === l)); });
+  }
+  var q = new URLSearchParams(location.search).get("lang");
+  set(q === "en" ? "en" : "th");
+  btns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      set(b.dataset.set);
+      var u = new URL(location.href); u.searchParams.set("lang", b.dataset.set); history.replaceState(null, "", u);
+    });
+  });
+})();
+</script>
+</body>
+</html>
